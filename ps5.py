@@ -149,6 +149,9 @@ class TimeTrigger(Trigger):
 class BeforeTrigger(TimeTrigger):
     def evaluate(self, date):
         d = date.get_pubdate()
+        if d.tzinfo is None:
+            tz = pytz.timezone("EST")
+            d = tz.localize(d)
         if d < self.date:
             return True
         else:
@@ -157,6 +160,9 @@ class BeforeTrigger(TimeTrigger):
 class AfterTrigger(TimeTrigger):
     def evaluate(self, date):
         d = date.get_pubdate()
+        if d.tzinfo is None:
+            tz = pytz.timezone("EST")
+            d = tz.localize(d)
         if d > self.date:
             return True
         else:
