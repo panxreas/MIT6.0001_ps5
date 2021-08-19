@@ -95,30 +95,6 @@ class PhraseTriggers(Trigger):
         
     def is_phrase_in(self, story):
         
-        phrase = str(self.PhraseTriggers).lower()
-        s = str(story).lower()
-        count = 0
-        
-        for section in range(len(s)):
-            for word in phrase.split():
-                #print(s[section:section+len(word)])
-                if word == s[section:section+len(word)]:
-                    count += 1
-                    #print(count)
-                    if count == len(phrase.split()):
-                        return True
-        if count == len(phrase.split()):
-            return True
-        else:
-            return False
-
-# Problem 3
-class TitleTrigger(PhraseTriggers):
-
-    def __init__(self, PhraseTriggers):
-        self.PhraseTriggers = PhraseTriggers
-    
-    def evaluate(self, story):
         phrase = str(self.PhraseTriggers).lower().split()
         s = str(story).lower()
         
@@ -138,6 +114,15 @@ class TitleTrigger(PhraseTriggers):
             return True
         else:
             return False
+
+# Problem 3
+class TitleTrigger(PhraseTriggers):
+
+    def __init__(self, PhraseTriggers):
+        self.PhraseTriggers = PhraseTriggers
+    
+    def evaluate(self, story):
+        return self.is_phrase_in(story)
 
 # Problem 4
 # TODO: DescriptionTrigger
