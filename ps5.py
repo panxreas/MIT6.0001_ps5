@@ -95,28 +95,6 @@ class PhraseTriggers(Trigger):
         
     def is_phrase_in(self, story):
         
-        phrase = self.PhraseTriggers.lower()
-        story = self.title.lower()
-        count = 0
-        
-        for section in range(len(story)):
-            for word in phrase.split():
-                if word == story[section:section+len(word)]:
-                    count += 1
-                    if count == len(phrase.split()):
-                        return True
-        if count == len(phrase.split()):
-            return True
-        else:
-            return False 
-
-# Problem 3
-class TitleTrigger(PhraseTriggers):
-
-    def __init__(self, PhraseTriggers):
-        self.PhraseTriggers = PhraseTriggers
-    
-    def evaluate(self, story):
         phrase = str(self.PhraseTriggers).lower()
         s = str(story).lower()
         count = 0
@@ -130,6 +108,33 @@ class TitleTrigger(PhraseTriggers):
                     if count == len(phrase.split()):
                         return True
         if count == len(phrase.split()):
+            return True
+        else:
+            return False
+
+# Problem 3
+class TitleTrigger(PhraseTriggers):
+
+    def __init__(self, PhraseTriggers):
+        self.PhraseTriggers = PhraseTriggers
+    
+    def evaluate(self, story):
+        phrase = str(self.PhraseTriggers).lower().split()
+        s = str(story).lower()
+        
+        clean_s = ''
+        for char in s:
+            if char not in string.punctuation:
+                clean_s += char
+            else:
+                clean_s += ' '
+        clean_story = clean_s.split()
+        
+        if all(word in clean_story for word in phrase) == False:
+            return False
+        
+        frst_index = clean_story.index(phrase[0])          
+        if clean_story[frst_index:frst_index + len(phrase)] == phrase:
             return True
         else:
             return False
