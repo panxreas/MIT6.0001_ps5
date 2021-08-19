@@ -171,13 +171,34 @@ class AfterTrigger(TimeTrigger):
 # COMPOSITE TRIGGERS
 
 # Problem 7
-# TODO: NotTrigger
-
+class NotTrigger(Trigger):
+    
+    def __init__(self, trigger_x):
+        self.trigger_x = trigger_x
+    
+    def evaluate(self, news_s):
+        return not self.trigger_x.evaluate(news_s)
+        
 # Problem 8
-# TODO: AndTrigger
-
+class AndTrigger(Trigger):
+    
+    def __init__(self, trigger_a, trigger_b):
+        self.trigger_a = trigger_a
+        self.trigger_b = trigger_b 
+        
+    def evaluate(self, news_s):
+        return self.trigger_a.evaluate(news_s) and self.trigger_b.evaluate(news_s)
+        
 # Problem 9
-# TODO: OrTrigger
+class OrTrigger(Trigger):
+    
+    def __init__(self, trigger_a, trigger_b):
+        self.trigger_a = trigger_a
+        self.trigger_b = trigger_b 
+        
+    def evaluate(self, news_s):
+        return self.trigger_a.evaluate(news_s) or self.trigger_b.evaluate(news_s)
+
 
 
 #======================
