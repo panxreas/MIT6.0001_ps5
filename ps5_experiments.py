@@ -104,7 +104,7 @@ class TitleTrigger(PhraseTriggers):
         self.PhraseTriggers = PhraseTriggers
     
     def evaluate(self, story):
-        
+        pass
 
         
         
@@ -119,8 +119,10 @@ s2  = TitleTrigger('purple cow')
 print(s1.evaluate(symbols))
 print(s2.evaluate(symbols))        
         
-        
-        
+dateT = "3 Oct 2016 17:00:10"
+date_output = datetime.strptime(dateT, "%d %b %Y %H:%M:%S")
+print(date_output)
+print(type(date_output))
 
 
 

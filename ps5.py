@@ -125,19 +125,42 @@ class TitleTrigger(PhraseTriggers):
         return self.is_phrase_in(story)
 
 # Problem 4
-# TODO: DescriptionTrigger
+class DescriptionTrigger(PhraseTriggers):
+    
+    def __init__(self, PhraseTriggers):
+        self.PhraseTriggers = PhraseTriggers
+    
+    def evaluate(self, story):
+        return self.is_phrase_in(story)
 
 # TIME TRIGGERS
 
 # Problem 5
-# TODO: TimeTrigger
+class TimeTrigger(Trigger):
+    def __init__(self, dateT):
+        d = datetime.strptime(dateT, "%d %b %Y %H:%M:%S")
+        tz = pytz.timezone("EST")
+        self.date = tz.localize(d)
 # Constructor:
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
 #        Convert time from string to a datetime before saving it as an attribute.
 
 # Problem 6
-# TODO: BeforeTrigger and AfterTrigger
+class BeforeTrigger(TimeTrigger):
+    def evaluate(self, date):
+        d = date.get_pubdate()
+        if d < self.date:
+            return True
+        else:
+            return False
 
+class AfterTrigger(TimeTrigger):
+    def evaluate(self, date):
+        d = date.get_pubdate()
+        if d > self.date:
+            return True
+        else:
+            return False
 
 # COMPOSITE TRIGGERS
 
